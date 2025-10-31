@@ -33,10 +33,10 @@ public class Teste : MonoBehaviour
             rb.AddForce(new Vector3(
                 2 * x, 0, 2 * z), ForceMode.Impulse);
             lr.enabled = false;
-            if (GameManager.gm)
-            {
-                GameManager.gm.tacada();
-            }
+            //if (GameManager.gm)
+            //{
+            //    GameManager.gm.tacada();
+            //}
         }
         velocidade = rb.velocity.magnitude;
         if (velocidade < 0.05f)
