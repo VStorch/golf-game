@@ -1,41 +1,32 @@
-﻿
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
+[AddComponentMenu("Camera-Control/Smooth Follow")]
 public class SmoothFollow : MonoBehaviour
 {
-
+    [Header("Target Settings")]
     public Transform target;
-    public Transform target2;
 
-    public float distance = 10.0f;
-    public float height = 5.0f;
-    public float heightDamping = 2.0f;
-    public float rotationDamping = 0.0f;
-
-    [AddComponentMenu("Camera-Control/Smooth Follow")]
+    [Header("Follow Settings")]
+    public float distance = 10f;
+    public float height = 5f;
+    public float rotationDamping = 2f;
+    public float heightDamping = 2f;
 
     void LateUpdate()
     {
-        if (!target) return;
+        if (target == null) return;
 
-        float wantedRotationAngle = target.eulerAngles.y;
-        float wantedHeight = target.position.y + height;
+        float desiredRotation = target.eulerAngles.y;
+        float desiredHeight = target.position.y + height;
 
-        float currentRotationAngle = transform.eulerAngles.y;
-        float currentHeight = transform.position.y;
+        float currentRotation = Mathf.LerpAngle(transform.eulerAngles.y, desiredRotation, rotationDamping * Time.deltaTime);
+        float currentHeight = Mathf.Lerp(transform.position.y, desiredHeight, heightDamping * Time.deltaTime);
 
-        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
+        Quaternion rotation = Quaternion.Euler(0f, currentRotation, 0f);
+        Vector3 newPosition = target.position - rotation * Vector3.forward * distance;
+        newPosition.y = currentHeight;
 
-        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
-
-        var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
-
-        transform.position = target.position;
-        transform.position -= currentRotation * Vector3.forward * distance;
-
-        transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
-
+        transform.position = newPosition;
         transform.LookAt(target);
     }
 }
