@@ -770,11 +770,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 901064426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a045427a07390644941e329763a1d0a, type: 3}
+  m_Script: {fileID: 11500000, guid: d6b309911894d2b458bf44473259fdb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  z: 4
+  maxX: 10
+  maxZ: 10
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
