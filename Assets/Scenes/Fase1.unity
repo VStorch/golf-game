@@ -881,16 +881,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 901064430}
-  target2: {fileID: 1697751119}
   distance: 10
   height: 5
-  heightDamping: 2
   rotationDamping: 0
---- !u!4 &1697751119 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6178856737547493612, guid: 94b251196233ed34ab51476b00b41f49, type: 3}
-  m_PrefabInstance: {fileID: 666297610}
-  m_PrefabAsset: {fileID: 0}
+  heightDamping: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
