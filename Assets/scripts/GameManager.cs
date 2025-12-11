@@ -1,28 +1,33 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager gm;
 
+    [Header("UI")]
     public TMP_Text textTacadas;
     public TMP_Text textPar;
+    public GameObject panelVitoria;
+    public TMP_Text textResultadoFinal;
 
+    [Header("Jogo")]
     public int tacadas;
     public int par;
 
-    private int recorde;
-    private int pontuacao;
+    private void Awake()
+    {
+        gm = this;
+    }
 
     void Start()
     {
-        if (gm == null)
-            gm = this.gameObject.GetComponent<GameManager>();
-
         tacadas = 0;
         textTacadas.text = "Tacadas: 0";
         textPar.text = "Par: " + par;
-        pontuacao = 0;
+
+        panelVitoria.SetActive(false);
     }
 
     public void tacada()
@@ -43,12 +48,30 @@ public class GameManager : MonoBehaviour
             0 => "Par",
             1 => "Bogey",
             2 => "Double Bogey",
-            3 => "Triple Bogey",
-            _ => tacadas < par ? "Excelente!" : "Ruim!"
+            _ => tacadas < par ? "Incrível!" : "Ruim!"
         };
 
-        Debug.Log("Resultado: " + resultado);
+        AbrirTelaVitoria(resultado);
+    }
 
-        // Abrir um painel UI avisando o resultado
+    private void AbrirTelaVitoria(string resultado)
+    {
+        textResultadoFinal.text = resultado;
+        panelVitoria.SetActive(true);
+
+        // Pausar o jogo
+        Time.timeScale = 0f;
+    }
+
+    public void Continuar()
+    {
+        // Despausar
+        Time.timeScale = 1f;
+
+        // 1) Recarregar fase atual:
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        // ou 2) Carregar próxima fase
+        // SceneManager.LoadScene("Fase2");
     }
 }
