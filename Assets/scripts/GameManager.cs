@@ -4,10 +4,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gm;
+
     public TMP_Text textTacadas;
     public TMP_Text textPar;
+
     public int tacadas;
     public int par;
+
     private int recorde;
     private int pontuacao;
 
@@ -24,8 +27,28 @@ public class GameManager : MonoBehaviour
 
     public void tacada()
     {
-        Debug.Log("tacada++");
         tacadas++;
         textTacadas.text = "Tacadas: " + tacadas;
+    }
+
+    public void FinalizarBuraco()
+    {
+        int diff = tacadas - par;
+
+        string resultado = diff switch
+        {
+            -3 => "Albatross",
+            -2 => "Eagle",
+            -1 => "Birdie",
+            0 => "Par",
+            1 => "Bogey",
+            2 => "Double Bogey",
+            3 => "Triple Bogey",
+            _ => tacadas < par ? "Excelente!" : "Ruim!"
+        };
+
+        Debug.Log("Resultado: " + resultado);
+
+        // Abrir um painel UI avisando o resultado
     }
 }

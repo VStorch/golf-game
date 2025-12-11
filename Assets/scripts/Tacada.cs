@@ -71,8 +71,14 @@ public class Tacada : MonoBehaviour
                         new Vector3(2 * x, 0, 2 * z),
                         ForceMode.Impulse);
                     lr.enabled = false;
-                    // if (GameManager.gm)
-                    //    G
+                    if (t.phase == TouchPhase.Ended)
+                    {
+                        rb.AddForce(new Vector3(x, 0, z), ForceMode.Impulse);
+                        lr.enabled = false;
+
+                        if (GameManager.gm != null)
+                            GameManager.gm.tacada();
+                    }
                 }
 
             }

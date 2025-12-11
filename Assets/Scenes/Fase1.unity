@@ -218,6 +218,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -2790203780373059813, guid: 94b251196233ed34ab51476b00b41f49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 666297621}
+    - targetCorrespondingSourceObject: {fileID: -2790203780373059813, guid: 94b251196233ed34ab51476b00b41f49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 666297629}
     - targetCorrespondingSourceObject: {fileID: 7349655231179780853, guid: 94b251196233ed34ab51476b00b41f49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 45667345}
@@ -321,11 +324,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8420232193779099810, guid: 94b251196233ed34ab51476b00b41f49, type: 3}
 --- !u!64 &666297622
@@ -416,6 +419,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8530338694401152274, guid: 94b251196233ed34ab51476b00b41f49, type: 3}
+--- !u!114 &666297629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666297616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e402538e88ee2a74fa9a54fd0fad2245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,9 +539,10 @@ GameObject:
   - component: {fileID: 901064431}
   - component: {fileID: 901064432}
   - component: {fileID: 901064433}
+  - component: {fileID: 901064434}
   m_Layer: 0
-  m_Name: Sphere
-  m_TagString: Untagged
+  m_Name: Bola
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -775,6 +791,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxX: 10
   maxZ: 10
+--- !u!114 &901064434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901064426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d34277585bf2604997e0f46d8337601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 901064431}
+  minSpeed: 0.3
+  maxRollingTime: 2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
