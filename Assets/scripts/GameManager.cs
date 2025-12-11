@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text textTacadas;
     public TMP_Text textPar;
     public GameObject panelVitoria;
+    public GameObject panelDados;
     public TMP_Text textResultadoFinal;
 
     [Header("Jogo")]
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
         textTacadas.text = "Tacadas: 0";
         textPar.text = "Par: " + par;
 
+        panelDados.SetActive(true);
         panelVitoria.SetActive(false);
     }
 
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     private void AbrirTelaVitoria(string resultado)
     {
         textResultadoFinal.text = resultado;
+        panelDados.SetActive(false);
         panelVitoria.SetActive(true);
 
         // Pausar o jogo
