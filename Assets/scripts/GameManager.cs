@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public TMP_Text textTacadas;
     public TMP_Text textPar;
+    public TMP_Text textRecorde;
     public GameObject panelVitoria;
     public GameObject panelDados;
     public TMP_Text textResultadoFinal;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Jogo")]
     public int tacadas;
     public int par;
+    private int recorde;
 
     private void Awake()
     {
@@ -27,6 +29,14 @@ public class GameManager : MonoBehaviour
         tacadas = 0;
         textTacadas.text = "Tacadas: 0";
         textPar.text = "Par: " + par;
+
+        recorde = PlayerPrefs.GetInt("recorde", -1);
+
+        if (recorde == -1)
+
+            textRecorde.text = "Recorde: –";
+        else
+            textRecorde.text = "Recorde: " + recorde;
 
         panelDados.SetActive(true);
         panelVitoria.SetActive(false);
@@ -53,7 +63,29 @@ public class GameManager : MonoBehaviour
             _ => tacadas < par ? "Incrível!" : "Ruim!"
         };
 
+        AtualizarRecorde();
+
         AbrirTelaVitoria(resultado);
+    }
+
+    private void AtualizarRecorde()
+    {
+        if (recorde == -1)
+        {
+            recorde = tacadas;
+            PlayerPrefs.SetInt("recorde", recorde);
+            PlayerPrefs.Save();
+            textRecorde.text = "Recorde: " + recorde;
+            return;
+        }
+
+        if (tacadas < recorde)
+        {
+            recorde = tacadas;
+            PlayerPrefs.SetInt("recorde", recorde);
+            PlayerPrefs.Save();
+            textRecorde.text = "Recorde: " + recorde;
+        }
     }
 
     private void AbrirTelaVitoria(string resultado)

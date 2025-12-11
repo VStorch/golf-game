@@ -1909,6 +1909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textTacadas: {fileID: 145161243}
   textPar: {fileID: 1832524189}
+  textRecorde: {fileID: 124027298}
   panelVitoria: {fileID: 2045985282}
   panelDados: {fileID: 1338211894}
   textResultadoFinal: {fileID: 1227147568}
