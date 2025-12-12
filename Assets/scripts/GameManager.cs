@@ -115,4 +115,29 @@ public class GameManager : MonoBehaviour
         // Avançar pra próxima fase:
         // SceneManager.LoadScene("Fase2");
     }
+
+    public void RepetirFase()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ProximaFase()
+    {
+        Time.timeScale = 1f;
+
+        // Pega o índice da cena atual
+        int cenaAtual = SceneManager.GetActiveScene().buildIndex;
+        int proximaCena = cenaAtual + 1;
+
+        // Verifica se existe próxima fase no Build Settings
+        if (proximaCena < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(proximaCena);
+        }
+        else
+        {
+            // SceneManager.LoadScene("Menu");
+        }
+    }
 }
