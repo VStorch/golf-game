@@ -1535,7 +1535,7 @@ MonoBehaviour:
   panelDados: {fileID: 1338211894}
   textResultadoFinal: {fileID: 1227147568}
   tacadas: 0
-  par: 0
+  par: 2
 --- !u!4 &1698097762
 Transform:
   m_ObjectHideFlags: 0
