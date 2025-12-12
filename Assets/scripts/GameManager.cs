@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public TMP_Text textTacadas;
+    public TMP_Text textTacadasFinal;
     public TMP_Text textPar;
     public TMP_Text textRecorde;
     public GameObject panelVitoria;
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour
     [Header("Jogo")]
     public int tacadas;
     public int par;
+
     private int recorde;
+    private string recordeKey;
 
     private void Awake()
     {
@@ -26,14 +29,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Identificador do recorde baseado no nome da fase
+        recordeKey = "recorde_" + SceneManager.GetActiveScene().name;
+
         tacadas = 0;
         textTacadas.text = "Tacadas: 0";
         textPar.text = "Par: " + par;
 
-        recorde = PlayerPrefs.GetInt("recorde", -1);
+        recorde = PlayerPrefs.GetInt(recordeKey, -1);
 
         if (recorde == -1)
-
             textRecorde.text = "Recorde: –";
         else
             textRecorde.text = "Recorde: " + recorde;
@@ -64,7 +69,6 @@ public class GameManager : MonoBehaviour
         };
 
         AtualizarRecorde();
-
         AbrirTelaVitoria(resultado);
     }
 
@@ -72,41 +76,43 @@ public class GameManager : MonoBehaviour
     {
         if (recorde == -1)
         {
-            recorde = tacadas;
-            PlayerPrefs.SetInt("recorde", recorde);
-            PlayerPrefs.Save();
-            textRecorde.text = "Recorde: " + recorde;
+            SalvarNovoRecorde(tacadas);
             return;
         }
 
         if (tacadas < recorde)
         {
-            recorde = tacadas;
-            PlayerPrefs.SetInt("recorde", recorde);
-            PlayerPrefs.Save();
-            textRecorde.text = "Recorde: " + recorde;
+            SalvarNovoRecorde(tacadas);
         }
+    }
+
+    private void SalvarNovoRecorde(int novoRecorde)
+    {
+        recorde = novoRecorde;
+        PlayerPrefs.SetInt(recordeKey, recorde);
+        PlayerPrefs.Save();
+        textRecorde.text = "Recorde: " + recorde;
     }
 
     private void AbrirTelaVitoria(string resultado)
     {
         textResultadoFinal.text = resultado;
+        textTacadasFinal.text = "Tacadas: " + tacadas;
+
         panelDados.SetActive(false);
         panelVitoria.SetActive(true);
 
-        // Pausar o jogo
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Pausar jogo
     }
 
     public void Continuar()
     {
-        // Despausar
         Time.timeScale = 1f;
 
-        // 1) Recarregar fase atual:
+        // Recarregar a fase atual
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        // ou 2) Carregar próxima fase
+        // Avançar pra próxima fase:
         // SceneManager.LoadScene("Fase2");
     }
 }
